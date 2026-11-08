@@ -1,41 +1,24 @@
 FROM node:22-alpine
 
-ENV NODE_ENV=production
 WORKDIR /app
 
-COPY --chown=node:node package.json ./
-COPY --chown=node:node src ./src
-
-USER node
-EXPOSE 3000
-
-CMD ["npm", "start"]
-
-
-
-
-
-
-# Use an official Node.js runtime as a parent image
-FROM node:22-alpine
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copy package files with node ownership
+COPY --chown=node:node package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --omit=dev
 
-# Copy the rest of the application source code to the container
-COPY . .
+# Copy application source code with node ownership
+COPY --chown=node:node . .
 
-# Expose port 3000 to the outside world
+# Expose port 3000
 EXPOSE 3000
 
 # Define environment variable
 ENV NODE_ENV=production
 
-# Command to run the application
-CMD ["node", "app.js"]
+# Switch to non-root user
+USER node
+
+# Start application
+CMD ["npm", "start"]
