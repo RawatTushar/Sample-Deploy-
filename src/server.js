@@ -6,7 +6,7 @@ const port = Number(process.env.PORT) || 3000;
 const server = http.createServer((request, response) => {
   if (request.method === "GET" && request.url === "/health") {
     response.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-    response.end(JSON.stringify({ status: "ok" }));
+    response.end(JSON.stringify({ status: "okk" }));
     return;
   }
 
