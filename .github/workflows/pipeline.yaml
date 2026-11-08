@@ -36,7 +36,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/deploy
+            cd /home/ubuntu/Sample-Deploy-
 
             echo "DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/sample-node:${{ github.sha }}" > .env
 
